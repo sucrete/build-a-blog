@@ -33,10 +33,15 @@ class Handler(webapp2.RequestHandler):
 
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+class BlogPost(db.Model):
+    title = db.StringProperty(required = True)
+    post = db.TextProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
 
 class MainPage(Handler):
     def front_render(self, title="", body="", error=""):
         self.render("front.html", title=title, body=body, error=error)
+        all_posts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created desc")
 
     def get(self):
         self.front_render()
@@ -46,10 +51,12 @@ class MainPage(Handler):
         body = self.request.get("body")
 
         if title and body:
-            self.write("thanks, guy!")
+            a = BlogPost(title = title, body = body)
+            a.put() #this will store the post in the database
+            self.redirect("/")
 
         else:
-            error = "the bros need both a title and a body before we post it, dudely"
+            error = "the Bros need both a title and a body before we post it, dudely"
             self.front_render(title, body, error)
 
 app = webapp2.WSGIApplication([
