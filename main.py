@@ -47,6 +47,19 @@ class MainPage(Handler):
         self.front_render()
 
     def post(self):
+
+
+
+
+
+class FormPage(Handler):
+    def form_render(self, title="", body="", error=""):
+        self.render("blogformpage.html", title=title, body=body, error=error)
+
+    def get(self):
+        self.form_render()
+
+    def post(self):
         title = self.request.get("title")
         body = self.request.get("body")
 
@@ -57,8 +70,9 @@ class MainPage(Handler):
 
         else:
             error = "the Bros need both a title and a body before we post it, dudely"
-            self.front_render(title, body, error)
+            self.form_render(title, body, error)
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/blog', MainPage)
+    ('/newpost', FormPage)
 ], debug=True)

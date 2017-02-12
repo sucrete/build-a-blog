@@ -2,30 +2,14 @@
 
 {% block main_content %}
 
-<!DOCTYPE html>
-
-<html>
-<head><title>Main Page</title>
-</head>
-
-<body>
-    <form method="post">
-      <label>
-        <div> Title </div>
-        <input type="text" name="title" value="{{title}}"/>
-      </label>
-      <label>
-        <div> Blog Body </div>
-        <textarea name="body">{{body}}</textarea>
-      </label>
-
-      <div class="error"> {{error}} </div>
-
-      <input type="submit"/>
-    </form>
-</body>
-
-</html>
-
+  {% for post in posts %}
+    <div class="blogpost"/>
+      <div class="post-title"><h3>{{post.title}}</h3></div>
+      <hr>
+      <div>
+      <p class="body">{{post.body}}</p>
+      </div>
+    </div>
+  {% endfor %}
 
 {% endblock %}
