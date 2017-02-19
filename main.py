@@ -51,17 +51,19 @@ class FormPage(Handler):
         post = self.request.get("post")
 
         if title and post:
-            a = BlogPost(title = title, post = post)
-            a.put() #this will store the post in the database
-            self.redirect('/blog')
+            q = BlogPost(title = title, post = post)
+            q.put() #this will store the post in the database
+            q_id = q.key().id()
+            self.redirect('/blog/%s' % q_id)#does the q object contain an id?
 
         else:
             error = "the Bros need a title AND a body before we can post it, dudely"
             self.render("blogformpage.html", title=title, body=body, error=error)
 
 class Permalink(Handler):
-    def get(self, post_id):
-        key = db.Key.from_path('BlogPost', int(post_id), parent=blog_key())
+    def get(self, id):
+        key = db.Key.from_path('BlogPost', int(id))#this need a blog key? (i.e. ",parent=blog_key()"). try it without first
+        #the .from_path method pulls from the url
         post = db.get(key)
 
         if not post:
@@ -69,6 +71,7 @@ class Permalink(Handler):
             return
 
         self.render("permalink.html", post = post)
+        #post.title and post.post in 'permalink.html' should be filled by the post object which was got with the 'db.get(key)' method directly above
 
 app = webapp2.WSGIApplication([
     ('/blog', MainPage),
