@@ -53,12 +53,12 @@ class FormPage(Handler):
         if title and post:
             q = BlogPost(title = title, post = post)
             q.put() #this will store the post in the database
-            q_id = q.key().id()
-            self.redirect('/blog/%s' % q_id)#does the q object contain an id?
+            q_id = str(q.key().id())#does the q object contain an id? yes
+            self.redirect('/blog/%s' % q_id)
 
         else:
             error = "the Bros need a title AND a body before we can post it, dudely"
-            self.render("blogformpage.html", title=title, body=body, error=error)
+            self.render("blogformpage.html", title=title, post=post, error=error)
 
 class Permalink(Handler):
     def get(self, id):

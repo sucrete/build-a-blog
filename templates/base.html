@@ -8,13 +8,20 @@
   <style type="text/css">
     body {
       font-family: 'Acme', sans-serif;
-      width: 800px;
+      width: 830px;
       margin: 0 auto;
       padding: 10px;
     }
-
+    div {
+      width: 800px;
+      margin: 0 auto;
+    }
     .error {
       color: red
+    }
+    form {
+      width: 800px;
+      margin: 0 auto;
     }
 
     label {
@@ -35,7 +42,7 @@
     }
     input [type=submit] {
       font-size: 24px;
-      font-family: sans-serif;
+      font-family: 'Acme', sans-serif;
     }
     .blogpost + .blogpost {
       margin-top: 30px;
@@ -48,9 +55,38 @@
       margin: 0;
       font-size: 17px;
     }
+
+    #basebar {
+      background-image: url("http://implantandoralsurgery.com/wp/wp-content/themes/enfold%207/images/background-images/noise-for-light-background.png");
+      margin: 0;
+      list-style-type: none;
+      overflow: hidden;
+      padding: 0;
+      background-color: rgba(63, 191, 191, .3);
+    }
+    #bros {
+      padding-left: 15px;
+
+    }
+    #smidge {
+      display: block;
+      margin: 5px;
+      content: "";
+    }
+    hr {
+      width: 800px;
+      margin: 0 auto;
+    }
+    #individualpost {
+      text-decoration: none;
+    }
   </style>
   <body>
-    <h2> Blog Brothers </h2>
+    <ul id="basebar">
+      <li><a href="/blog" style="text-decoration: none;"><h1 id="bros"> Blog Brothers </h1></a></li>
+
+    </ul>
+    <br>
 
 {% block content %}
 
