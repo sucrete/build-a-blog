@@ -31,10 +31,6 @@ class BlogPost(db.Model):
     post = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
-    # def render(self):
-    #     self._render_text = self.content.replace('\n', '<br>')
-    #     return render_str('blogformpage.html', p=self)
-
 
 
 class MainPage(Handler):
